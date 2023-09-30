@@ -52,9 +52,20 @@
 
 ## 2. Methodology 
 ### 2.1. Problem statement
+The task of extracting vocals from a song and converting it into another vocal voice while maintaining pitch and intonation.
 
 ### 2.2. Block diagram of the solution 
 
 ### 2.3. Stages of solving the problem
+#### 2.3.1. Choosing metrics
+
+#### 2.3.2. Object and target
+Object is a song with the original vocal track.
+
+Target variable is a song with a vocal track replaced by different artist
+
+#### 2.3.3. Data
+
+#### 2.3.4. Data preparation
 
 ## 4. Realization
