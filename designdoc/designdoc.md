@@ -65,6 +65,7 @@ Object is a song with the original vocal track.
 Target variable is a song with a vocal track replaced by different artist
 
 #### 2.3.3. Data
+The data are blocks linking audio tracks annotated with song lyrics and emotion metadata.
 
 #### 2.3.4. Data preparation
 
