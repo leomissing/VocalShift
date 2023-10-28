@@ -101,4 +101,58 @@ The data are blocks linking audio tracks annotated with song lyrics and emotion 
 
 #### 2.3.4. Data preparation
 
+## 3. Pilot Preparation
+
+### 3.1. Pilot Evaluation Method
+
+To evaluate the success of the pilot project of our chatbot the following method is proposed:
+
+In the existing system, we will add a chatbot capable of changing the vocal track in a song to match a different artist's performance. This chatbot will be accessible to users through various chat platforms.
+
+To assess the bot's effectiveness, we will utilize AB testing. One group of users will have access to the chatbot with the new functionality (Group A), while the other group will use the regular chatbot without this feature (Group B).
+
+To evaluate effectiveness, we will collect the following data:
+
+- The number of users using the new functionality.
+- The number of sessions in which the new feature was used.
+- User satisfaction expressed through surveys and feedback.
+- The quality of audio tracks created using the new functionality (evaluated by the audience).
+- The time users spend on the platform with the new functionality.
+
+To analyze effectiveness, we will compare the metrics of Group A with those of Group B. It's important to note that we might not have a good online metric so we will rely on proxy metrics such as user satisfaction and audio track quality.
+
+### 3.2. What We Consider a Successful Pilot
+
+We will consider the pilot successful if the following criteria are met:
+
+- An increase in the number of users using the new functionality by at least X% compared to Group B.
+- An increase in the average time users spend on the platform with the new functionality.
+- User satisfaction (measured by surveys and feedback) should not worsen and may even improve.
+- The quality of audio tracks created using the new functionality should be assessed as not inferior to the quality of audio tracks created using the old functionality.
+- There should be no significant technical failures or security issues.
+
+If all these criteria are met, the pilot will be considered successful, and we can proceed with the implementation of the new chatbot functionality. Otherwise, we will need to analyze the results, identify issues, and make improvements to the system.
+
+In addition to these success criteria, we will also take into account the return on investment. We will assess how long it will take for the system to become profitable and what the expected income will be from attracting new users using the new functionality.
+
+### 3.3. Pilot Preparation
+
+Preparing the pilot for the VocalShift project involves the following steps:
+
+- **Computational Complexity Assessment:** We will analyze the expected computational load that the chatbot will generate when processing and altering vocal tracks in songs. We will determine the resources (processor, memory, storage) required to ensure smooth and fast bot operation.
+
+- **Baseline Experiment:** Before launching the pilot, we will conduct experiments with the baseline version of the chatbot, which does not include the new functionality for changing vocal tracks. We will assess the performance and computational resources needed for handling regular user requests.
+
+- **Setting Computational Complexity Limits for Models:** If we find that the new functionality significantly increases the computational load, we will set limits on the use of this feature. For instance, we may restrict access to it only for premium subscribers or limit the number of simultaneous requests.
+
+- **Scalability Assessment:** If we discover that the chatbot with the new functionality could face increased popularity and load, we will explore scalability options. This may include the use of cloud resources or optimizing the system architecture.
+
+- **Technical Support Evaluation:** We will prepare the necessary technical infrastructure to support the chatbot in the pilot version. This includes performance monitoring, data backups, and addressing any issues that may arise during the pilot.
+
+- **Estimated Costs Calculation:** We will estimate the budget for preparing and conducting the pilot, including expenses for computational resources, development, testing, and monitoring. These costs will be part of the project's success evaluation.
+
+- **Monitoring Plan Development:** We will establish a monitoring system that tracks the chat bot's performance in real-time. This will enable us to promptly address any issues and improve the bot's operation.
+
+This section of pilot preparation will help ensure the smooth integration of new functionality into the chat bot and minimize risks associated with computational and technical aspects of the project.
+
 ## 4. Realization
