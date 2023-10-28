@@ -52,12 +52,44 @@
 
 ## 2. Methodology 
 ### 2.1. Problem statement
-The task of extracting vocals from a song and converting it into another vocal voice while maintaining pitch and intonation.
+The task of extracting vocals from a song and converting it into another vocal voice while maintaining pitch and intonation utilizing artificial intelligence.
 
 ### 2.2. Block diagram of the solution 
 
 ### 2.3. Stages of solving the problem
-#### 2.3.1. Choosing metrics
+
+#### 2.3.1 Metrics Selection
+Offline metrics are measures that evaluate the quality of vocal track generation based on historical data and expert assessments.
+
+- **MOS (Mean Opinion Score):** The average quality rating of vocal track generation on a five-point scale, obtained from experts or users.
+
+- **WER (Word Error Rate):** The percentage of errors in recognizing words in the generated track compared to the original song lyrics.
+
+- **F0 RMSE (Fundamental Frequency Root Mean Square Error):** The root mean square error in determining the fundamental frequency of sound in the generated track compared to the original.
+
+- **MFCC (Mel-Frequency Cepstral Coefficients) Distance:** The distance between the spectral characteristics of sound in the generated and target tracks.
+
+Online metrics are measures that can be obtained while the system is in operation.
+
+- **CSAT (Customer Satisfaction Score):** The percentage of users who rated their experience with the chatbot as positive.
+
+- **NPS (Net Promoter Score):** The percentage of users willing to recommend the chatbot to their friends or acquaintances.
+
+- **Retention Rate:** The percentage of users who return to using the chatbot after their initial interaction.
+
+- **Conversion Rate:** The percentage of users who switch to the paid version of the chatbot after using the free version.
+
+Technical metrics are related to the system's performance and speed.
+
+- **Latency:** The time the system takes to process a user's request and generate a response.
+
+- **Throughput:** The number of requests the system can process per unit of time.
+
+- **Availability:** The percentage of time when the system is available and functioning correctly.
+
+- **Error Rate:** The percentage of requests that the system couldn't process or processed incorrectly.
+
+The selection of these metrics allows us to assess the system's effectiveness from various angles, including generation quality, user satisfaction, and system performance. This will enable us to make more informed decisions and enhance the chatbot in line with project requirements and business objectives.
 
 #### 2.3.2. Object and target
 Object is a song with the original vocal track.
