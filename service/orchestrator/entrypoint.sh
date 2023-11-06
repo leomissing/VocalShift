@@ -1,0 +1,1 @@
+celery -A orchestrator worker -Q orchestrator

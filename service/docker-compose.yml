@@ -1,0 +1,54 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-admin}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-mypass}
+      - RABBITMQ_DEFAULT_PORT=${RABBITMQ_DEFAULT_PORT:-5672}
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 15s
+      timeout: 15s
+      retries: 3
+    restart: always
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: --requirepass ${REDIS_PASSWORD:-11110000}
+    volumes:
+      - ./data/redis:/var/lib/redis/data
+
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./orchestrator:/code/
+    environment:
+      - AMQP_HOST_STRING=${AMQP_HOST_STRING:-amqp://admin:mypass@rabbitmq:5672}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-11110000}
+
+    depends_on:
+      redis:
+        condition: service_healthy
+
+
+  telegram-bot:
+    build:
+      context: ./telegram-bot/.
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./telegram-bot:/code/
+    environment:
+      - AMQP_HOST_STRING=${AMQP_HOST_STRING:-amqp://admin:mypass@rabbitmq:5672}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-11110000}
+      - BOT_API_TOKEN=${BOT_API_TOKEN:-defaultvalue}
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
