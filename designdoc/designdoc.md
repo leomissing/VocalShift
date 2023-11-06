@@ -55,6 +55,7 @@
 The task of extracting vocals from a song and converting it into another vocal voice while maintaining pitch and intonation utilizing artificial intelligence.
 
 ### 2.2. Block diagram of the solution 
+![Solution diagram](diagram.png "Solution diagram")
 
 ### 2.3. Stages of solving the problem
 
@@ -156,3 +157,9 @@ Preparing the pilot for the VocalShift project involves the following steps:
 This section of pilot preparation will help ensure the smooth integration of new functionality into the chat bot and minimize risks associated with computational and technical aspects of the project.
 
 ## 4. Realization
+
+### 4.1 Service Development
+Docker Compouser will be used to orchestrate the project's services, and a standard Python application for working with a Telegram bot will be used to work with Telegram.   
+The orchestrator of the model's work will be a Python application built using the Celery distributed computing library.   
+Redis will be used in the database for speed of deployment, with the possibility of moving to Postgres in the future.
+### 4.2 Model Development
