@@ -1,1 +1,1 @@
-celery -A orchestrator worker -Q orchestrator
+celery -A main worker -Q orchestrator

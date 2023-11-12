@@ -1,5 +1,6 @@
 # Use the official Python 3.10 image as the base image
 FROM python:3.10
+ENV PYTHONUNBUFFERED=1
 
 # Set the working directory inside the container
 WORKDIR /code
@@ -14,4 +15,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Copy the rest of the application code to the container's working directory
 COPY . /code/.
-RUN python /code/main.py
+ENTRYPOINT ["sh","/code/entrypoint.sh"]
