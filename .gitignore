@@ -290,3 +290,10 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+#RVC repository
+RVC-beta-v2-0618
+#ultimatevocalremover repository
+vocalremover
+
+so-vits-svc
