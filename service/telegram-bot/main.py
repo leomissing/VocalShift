@@ -47,7 +47,8 @@ async def run_model(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     logger.info(f"I got {update.message.text}")
     await update.message.reply_text(f"You choose {update.message.text}. I will do all work now! Just chill and wait")
     await update.message.reply_text(f"Some results from our model!")
-    return BEGIN
+    await update.message.reply_text("Send me anoter Audio!")
+    return AUDIO
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
