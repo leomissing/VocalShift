@@ -27,16 +27,16 @@ BEGIN, AUDIO, RUN = range(3)
 
 # Define a few command handlers. These usually take the two arguments update and
 # context.
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Send a message when the command /start is issued."""
     user = update.effective_user
     await update.message.reply_html(
-        rf"Hello {user.mention_html()}! Send me audio"
+        rf"Hello {user.mention_html()}!"
     )
-    return AUDIO
+    return await begin(update, context)
 
 
-async def begin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def begin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """"""
     await update.message.reply_text("Send me Audio!")
     return AUDIO
@@ -45,10 +45,11 @@ async def begin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def run_model(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """"""
     logger.info(f"I got {update.message.text}")
-    await update.message.reply_text(f"You choose {update.message.text}. I will do all work now! Just chill and wait")
+    await update.message.reply_text(f"You have chosen {update.message.text}. "
+                                    f"I will do all work now! Just chill and wait",
+                                    reply_markup=ReplyKeyboardRemove())
     await update.message.reply_text(f"Some results from our model!")
-    await update.message.reply_text("Send me anoter Audio!")
-    return AUDIO
+    return await begin(update, context)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -56,15 +57,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.message.reply_text("Help! I need somebody HELP!")
 
 
-async def echo_audio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Echo the user message."""
-    if not update.message.audio or not update.message.audio.file_id:
-        await update.message.reply_text("Please, send me valid audio")
-        return AUDIO
-
-    # if update.message.audio and update.message.audio.file_id:
-    await update.message.reply_audio(update.message.audio.file_id)
-
+async def choose_vocal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     reply_keyboard = [["Sexy", "Angry", "Lovely"]]
 
     await update.message.reply_text(
@@ -74,6 +67,16 @@ async def echo_audio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ),
     )
     return RUN
+
+
+async def echo_audio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Echo the user message."""
+    if not update.message.audio or not update.message.audio.file_id:
+        await update.message.reply_text("Please, send me valid audio")
+        return AUDIO
+
+    await update.message.reply_audio(update.message.audio.file_id)
+    return await choose_vocal(update, context)
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -88,7 +91,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
     await update.message.reply_text(
-        "Bye! I hope we can talk again some day.", reply_markup=ReplyKeyboardRemove()
+        "Bye! I hope we can talk again some day. Write /start to work with me again", reply_markup=ReplyKeyboardRemove()
     )
 
     return ConversationHandler.END
@@ -103,9 +106,7 @@ def main() -> None:
     # application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
 
-    # on non command i.e message - echo the message on Telegram
     # application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
-    # application.add_handler(MessageHandler(filters.ATTACHMENT, echo_audio))
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start), ],
