@@ -297,3 +297,9 @@ RVC-beta-v2-0618
 vocalremover
 
 so-vits-svc
+
+py10
+
+sounds/kino_test_Instruments.wav
+sounds/kino_test_Vocals.wav
+sounds/kino_test.wav
