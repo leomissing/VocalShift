@@ -303,3 +303,5 @@ py10
 sounds/kino_test_Instruments.wav
 sounds/kino_test_Vocals.wav
 sounds/kino_test.wav
+sounds/kino_test_overlay.wav
+vocal-remover
