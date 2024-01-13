@@ -3,3 +3,4 @@ celery==5.3.4
 loguru==0.6.0
 redis==5.0.0
 requests==2.26.0
+pydub==0.25.1
