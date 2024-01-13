@@ -1,14 +1,15 @@
 import environ
 import logging
-
+import uuid
 from telegram import ForceReply, Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import (Application, CommandHandler,
                           ContextTypes, MessageHandler,
                           filters,     ConversationHandler, CallbackQueryHandler)
 
+from run_model import split_and_con_song
 env = environ.Env(BOT_API_TOKEN=(str, ""))
 
-
+users_files = dict()
 # initialize API token - Telegram
 telegram_token = env("BOT_API_TOKEN")
 
@@ -44,11 +45,16 @@ async def begin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 async def run_model(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """"""
+    print(users_files)
     logger.info(f"I got {update.message.text}")
     await update.message.reply_text(f"You have chosen {update.message.text}. "
                                     f"I will do all work now! Just chill and wait",
                                     reply_markup=ReplyKeyboardRemove())
+    user_file_name = users_files.get(update.effective_user.id)
+    split_and_con_song(user_file_name)
     await update.message.reply_text(f"Some results from our model!")
+    with open(f"results/{user_file_name}_overlay.mp3", "rb") as result_audio:
+        await update.message.reply_audio(result_audio)
     return await begin(update, context)
 
 
@@ -74,8 +80,11 @@ async def echo_audio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if not update.message.audio or not update.message.audio.file_id:
         await update.message.reply_text("Please, send me valid audio")
         return AUDIO
+    audio_file = await update.message.audio.get_file()
+    file_name = uuid.uuid4()
+    await audio_file.download_to_drive(f"sounds/{file_name}.mp3")
+    users_files[update.effective_user.id] = file_name
 
-    await update.message.reply_audio(update.message.audio.file_id)
     return await choose_vocal(update, context)
 
 

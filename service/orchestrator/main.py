@@ -14,6 +14,7 @@ celery_worker = Celery(
 )
 celery_queue = "orchestrator"
 
+
 @celery_worker.task(queue=celery_queue)
 def hello_world():
     logger.info("Another hard day of work...")
