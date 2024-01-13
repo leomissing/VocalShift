@@ -51,7 +51,7 @@ async def run_model(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                                     f"I will do all work now! Just chill and wait",
                                     reply_markup=ReplyKeyboardRemove())
     user_file_name = users_files.get(update.effective_user.id)
-    split_and_con_song(user_file_name)
+    split_and_con_song(user_file_name, update.message.text)
     await update.message.reply_text(f"Some results from our model!")
     with open(f"results/{user_file_name}_overlay.mp3", "rb") as result_audio:
         await update.message.reply_audio(result_audio)
@@ -64,7 +64,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 
 async def choose_vocal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    reply_keyboard = [["Sexy", "Angry", "Lovely"]]
+    reply_keyboard = [["Lady Gaga", "Eric Cartman", "David Bowie"]]
 
     await update.message.reply_text(
         "Please choose voice for shifting",
@@ -122,7 +122,7 @@ def main() -> None:
         states={
             BEGIN: [MessageHandler(filters.ALL, begin)],
             AUDIO: [MessageHandler(filters.ATTACHMENT, echo_audio)],
-            RUN: [MessageHandler(filters.Regex("^(Sexy|Angry|Lovely)$"), run_model)],
+            RUN: [MessageHandler(filters.Regex("^(Lady Gaga|Eric Cartman|David Bowie)$"), run_model)],
         },
         fallbacks=[CommandHandler("cancel", cancel), MessageHandler(filters.ALL, begin)],
     )

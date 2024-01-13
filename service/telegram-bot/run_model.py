@@ -13,7 +13,7 @@ def create_folders():
         os.makedirs(path)
 
 
-def split_and_con_song(file_name):
+def split_and_con_song(file_name, actor_name):
     from src.Convertor import Convertor
 
     # conv = Convertor()
